@@ -1,0 +1,94 @@
+#关于checkbox控件的使用
+
+##xml文件的配置
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is checkbox" />
+    
+    <CheckBox 
+        android:id="@+id/checkbox01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机"
+        />
+    
+    <CheckBox 
+        android:id="@+id/checkbox02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="电脑"
+        />
+    <CheckBox 
+        android:id="@+id/checkbox03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="推广"
+        />
+
+</LinearLayout>
+
+
+###########################################################################
+#父类与子类之间能相互转型
+##核心代码
+
+##自定义一个监听器内部类，用于监听用户点击
+class onCheckchangelistener implements OnClickListener{
+
+    
+		@Override
+		##传入的view参数可以获取checkbox，是因为view是checkbox的父类，编译器执行代码时会自动将checkbox向上转型为view类型
+    public void onClick(View view) {
+			// TODO Auto-generated method stub
+			System.out.println("is clicked");
+			
+      #将view类型对象向下转型为chekbox,checkbox是view的子类
+			CheckBox box = (CheckBox)view;
+			
+			int i = view.getId();
+      #获取checkbox的状态方法，也可以用if语句
+			switch(i){
+				case R.id.checkbox01:
+        #checkbox自带方法，判断状态是否为选中状态
+					if(box.isChecked()){
+						System.out.println("you check shouji");
+					}
+					else{
+						System.out.println("you cancel check shouji");
+					}
+					break;
+					
+				case R.id.checkbox02:
+					if(box.isChecked()){
+						System.out.println("you check dinnao");
+					}
+					else{
+						System.out.println("you cancel check diannao");
+					}
+					break;
+				
+				case R.id.checkbox03:
+					if(box.isChecked()){
+						System.out.println("you check tuiguang");
+					}
+					else{
+						System.out.println("you cancel check tuiguang");
+					}
+					break;
+					
+				default:
+					System.out.println("...");
+					break;
+			}
+			
+		}
+    }
