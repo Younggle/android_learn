@@ -38,9 +38,14 @@
 
 
 ###########################################################################
+##其实在android中自带了一个用于监听checkbox的监听器类
+
+
 #父类与子类之间能相互转型
 ##核心代码
 
+
+##先创建一个原理相同的checkbox监听器类
 ##自定义一个监听器内部类，用于监听用户点击
 class onCheckchangelistener implements OnClickListener{
 
@@ -92,3 +97,50 @@ class onCheckchangelistener implements OnClickListener{
 			
 		}
     }
+
+####————————————————————————————————————————————————————————————————————————————————————————————————####
+##android自带的checkboxclicklistener类
+#其原理与上面自定义的监听类相同，只是android已经帮我们封装好了，直接用就行
+
+class onCblistener implements OnCheckedChangeListener{
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isCheck) {
+			// TODO Auto-generated method stub
+			int i = buttonView.getId();
+			switch(i){
+			case R.id.checkbox01:
+				if(isCheck){
+					System.out.println("you check shouji");
+				}
+				else{
+					System.out.println("you cancel check shouji");
+				}
+				break;
+				
+			case R.id.checkbox02:
+				if(isCheck){
+					System.out.println("you check dinnao");
+				}
+				else{
+					System.out.println("you cancel check diannao");
+				}
+				break;
+			
+			case R.id.checkbox03:
+				if(isCheck){
+					System.out.println("you check tuiguang");
+				}
+				else{
+					System.out.println("you cancel check tuiguang");
+				}
+				break;
+				
+			default:
+				System.out.println("...");
+				break;
+		}
+		}
+    	
+    }
+
