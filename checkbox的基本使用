@@ -94,7 +94,6 @@ class onCheckchangelistener implements OnClickListener{
 					System.out.println("...");
 					break;
 			}
-			
 		}
     }
 
@@ -140,7 +139,40 @@ class onCblistener implements OnCheckedChangeListener{
 				System.out.println("...");
 				break;
 		}
+		##新添加控件全选按钮qx，实现全选功能
+		if(isCheck){
+				sj.setChecked(true);
+				dn.setChecked(true);
+				tg.setChecked(true);
+				qx.setChecked(true);
+			}else{
+				sj.setChecked(false);
+				dn.setChecked(false);
+				tg.setChecked(false);
+				qx.setChecked(false);
+			}
 		}
     	
     }
 
+#########
+##全选按钮还有一个更加简单的实现方法
+#单独写一个监听器
+##
+// 全选按钮实现监听类
+    class AllClickListener implements OnCheckedChangeListener{
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			// TODO Auto-generated method stub
+			sj.setChecked(isChecked);
+			dn.setChecked(isChecked);
+			tg.setChecked(isChecked);
+			qx.setChecked(isChecked);
+		}
+    	
+    }
+##实例化监听对象，为全选按钮设置监听器
+//全选按钮
+        AllClickListener allcheck = new AllClickListener();
+        qx.setOnCheckedChangeListener(allcheck);
