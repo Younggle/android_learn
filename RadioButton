@@ -1,0 +1,108 @@
+##  android学习笔记 
+## radiobutton的使用方法，radiogroup,radiobutton
+
+## 主界面配置文件activity_main.xml
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <RadioGroup 
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        
+        <RadioButton 
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="female"/>
+        <RadioButton 
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="male"/>
+        <RadioButton 
+            android:id="@+id/no_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="null"/>
+    </RadioGroup>
+
+</LinearLayout>
+
+
+#################
+######### 核心代码
+#################
+
+##首先声明一个radiogroup对象，和3个radiobutton对象
+private RadioGroup radioGroup;
+pivate RadioButton male,female,no_sex;
+
+##从配置文件中获取到控件的id
+
+male = (RadioButton)findViewById(R.id.male);
+female = (RadioButton)findViewById(R.id.female);
+no_sex = (RadioButton)findViewById(R.id.no_sex);
+radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
+
+
+
+##创建新的RadioButton监听类 RadioButtonListener
+## 这个继承自android.widget.CompoundButton.OnCheckedChangeListener的类，其好处在于不仅能监听到选择的是哪一个按钮，还能监听到按钮的状态
+
+
+class RadioButtonListener implements android.widget.CompoundButton.OnCheckedChangeListener{
+
+    ## buttonView获取用户点击的按钮，ischecked确定按钮的状态，是否被点击
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean ischecked) {
+			// TODO Auto-generated method stub
+			if(ischecked == true && buttonView.getId() == female.getId()){
+				Toast toast = Toast.makeText(getApplicationContext(), "信息确认,性别女", Toast.LENGTH_SHORT);                    
+		        toast.show();
+			}else if(ischecked == true && buttonView.getId() == male.getId()){
+				Toast toast = Toast.makeText(getApplicationContext(), "信息确认，性别男", Toast.LENGTH_SHORT);                    
+		        toast.show();
+			}else if(buttonView.getId() == no_sex.getId() &&  ischecked == true){
+				Toast toast = Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT);                    
+		        toast.show();
+			}
+		}
+  }
+
+## 实例化新的监听器对象
+
+RadioButtonListener rbl = new RadioButtonListener();
+
+## 为按钮设置监听器
+famale.setOnCheckedChangeListener(rbl);
+male.setOnCheckedChangeListener(rbl);
+no_sex.setOnCheckedChangeListener(rbl);
+
+
+
+
+
+### 简化的监听类，不能对按钮状态进行监听，只能监听到选择的按钮
+
+ class onClickListener implements OnCheckedChangeListener{
+
+		@Override
+		public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+			// TODO Auto-generated method stub
+			if(checkedId == famale.getId()){
+				Toast toast = Toast.makeText(getApplicationContext(), "性别：女", Toast.LENGTH_SHORT);                    
+		        toast.show();
+			}else if(checkedId == male.getId()){
+				Toast toast = Toast.makeText(getApplicationContext(), "性别：男", Toast.LENGTH_SHORT);                    
+		        toast.show();
+			}		
+		}
+ }
