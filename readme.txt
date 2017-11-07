@@ -1,2 +1,1 @@
-this is my second test,
-thanks for your reading.
+note something of learning android.
