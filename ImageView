@@ -1,0 +1,42 @@
+## <imageView />的scaleType详细用法
+
+//在android的界面中添加图片显示，可以通过配置XML文件，同时也可以在code中实现
+
+//在xml文件中，配置<imageView />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/imageViewId"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/naizi"
+        android:scaleType="fitCenter"
+        android:background="#0FF000" />
+    
+    <ImageView
+        android:id="@+id/imageView2Id"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/qunzhu"
+        android:scaleType="center"
+        android:background="#0FF000" />
+
+</LinearLayout>
+
+
+//在代码中只需要添加如下代码即可
+//直接为imageView拉取图片
+imageView.setImageResource(R.drawable.qunzhu);
+
+
+//为imageView设置scaleType
+imageView1.setScaleType(ScaleType.CENTER);
+imageView2.setScaleType(ScaleType.FIT_CENTER);
+
+
+## 凡是能在xml中进行配置的元素，都能在代码中实现。
