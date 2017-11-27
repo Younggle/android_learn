@@ -1,0 +1,47 @@
+// RelativeLayout相对布局
+
+// 在相对布局中layout_alignRight,layout_alignLeft,layout_alignBottom,layout_alignTop的详细用法
+// 加入padding为了更好的体现
+
+// <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/test1"
+        android:text="第一个textView1"
+        android:background="#FF00000"
+        android:padding="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/test2"
+        android:text="textView2"
+        android:layout_alignRight="@id/test1"
+        android:background="#0FF000" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/test3"
+        android:text="textV3"
+        android:layout_alignRight="@id/test1"
+        android:layout_alignBottom="@id/test1"
+        android:background="#00FFFF" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/test4"
+        android:text="textView4"
+        android:layout_alignTop="@id/test1"
+        android:background="#0FF000" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/test5"
+        android:text="textView5"
+        android:layout_alignBottom="@id/test1"
+        android:background="#0FF000" />
+        
+------------------------------------------------------------
+// 与父控件边缘对齐
+// layout_alignParentRight,layout_alignParentLeft,layout_alignParentTop,layout_alignParentBottom
+
+
