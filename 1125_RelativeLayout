@@ -29,5 +29,22 @@
 //android:layout_toRightOf="@id/firstView" 这行代码的意思是，让testview2的左边缘 对齐 testview1的右边缘
 // 简单的说，就是把testview2放到testview1右边，紧靠testview1，@id/firstView指明了对象。
 
-
+<TextView
+        android:id="@+id/firstView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FF0000"
+        android:text="第一个textview" />
+    
+<TextView
+        android:id="@+id/secondView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FF00"
+        android:text="第2个textView"
+        android:layout_toRightOf="@id/firstView" />
+     
+// 在新版本的API中toEndOf与toRightOf作用相同，toStartOf和toLeftOf相同
+// layout_below="@id/test"   紧贴元素test的下方
+/  layout_above="@id/test"  紧贴元素test的上方
 
