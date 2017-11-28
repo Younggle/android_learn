@@ -43,5 +43,31 @@
 ------------------------------------------------------------
 // 与父控件边缘对齐
 // layout_alignParentRight,layout_alignParentLeft,layout_alignParentTop,layout_alignParentBottom
-
+// 与LinearLayout一样，RelativeLayout也支持嵌套
+// 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:id="@+id/rl1" >
+        <RelativeLayout 
+              android:layout_width="match_parent"
+              android:layout_height="133dp"
+              android:background="#00F0F0"
+          >
+        
+        <TextView 
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="10sp"
+        	android:text="parent2"
+        	android:layout_alignParentRight="true"
+        	android:layout_alignParentBottom="true"
+        	android:padding="10dp"
+        	android:background="#00FF00"/>
+        
+        </RelativeLayout>
+</RelativeLayout>
+        
 
