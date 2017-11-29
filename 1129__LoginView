@@ -1,2 +1,74 @@
 // 使用RelativeLayout相对布局编写一个登录界面
 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp" >
+     <RelativeLayout 
+         android:layout_width="250dp"
+         android:layout_height="270dp"
+         android:background="#F1EBE4"
+         android:padding="8dp"
+         android:layout_centerHorizontal="true"
+         >
+         <TextView
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="center"
+        	android:id="@+id/testview"
+        	android:text="登录界面"
+        	android:textSize="20sp"
+        	android:padding="3dp" />
+    	<TextView 
+        	android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="用户名："
+	        android:layout_toLeftOf="@+id/usernameText"
+	        android:layout_alignBaseline="@+id/usernameText"
+	        android:layout_below="@+id/testview"
+	        />
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="密    码："
+	        android:layout_toLeftOf="@+id/passwordText"
+	        android:layout_alignBaseline="@+id/passwordText"
+	        android:layout_below="@+id/testview"
+	        />
+          
+          // android:hint 为编辑框添加默认的字符
+	    <EditText 
+	        android:id="@+id/usernameText"
+	        android:layout_width="160dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/testview"
+	        android:layout_alignRight="@+id/testview"
+	        android:hint="username"/>
+	    <EditText 
+	        android:id="@+id/passwordText"
+	        android:layout_width="160dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/usernameText"
+	        android:layout_alignParentRight="true"
+	        android:hint="password"
+	        android:inputType="textPassword"/>
+	    <Button 
+	        android:id="@+id/LoginButton"
+	        android:text="登录"
+	        android:layout_width="110dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/passwordText"
+	        android:layout_centerInParent="true"
+	        android:layout_margin="5dp"
+	        />
+	    <Button 
+	        android:id="@+id/cencel"
+	        android:text="取消"
+	        android:layout_width="110dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/LoginButton"
+	        android:layout_centerInParent="true"
+	        /> 
+     </RelativeLayout>
+</RelativeLayout>
