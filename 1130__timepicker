@@ -1,0 +1,57 @@
+// 时间设置 timepicker
+
+// 布局文件很简单，一个timepicker ,一个获取时间的button
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TimePicker 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timepicker"
+        />
+    <Button 
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timepicker"
+        android:text="获取时间"/>
+    
+
+</RelativeLayout>
+
+// setIs24HourView(true) 设置时间为24小时制
+//timepicker.setIs24HourView(true);
+        timepicker = (TimePicker)findViewById(R.id.timepicker);
+        TimeListener timelistener = new TimeListener();
+        timepicker.setOnTimeChangedListener(timelistener);
+        
+        button = (Button)findViewById(R.id.button);
+        ButtonListener btnlistener = new ButtonListener();
+        button.setOnClickListener(btnlistener);
+        
+class ButtonListener implements OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			int hour = timepicker.getCurrentHour();
+			int minute = timepicker.getCurrentMinute();
+			System.out.println("h:" + hour + ",minute:" +minute);
+		}
+    	
+}
+
+// timepicker的监听器
+class TimeListener implements OnTimeChangedListener{
+
+    	//
+    	
+		@Override
+		public void onTimeChanged(TimePicker view, int hourofDay, int minutes) {
+			// TODO Auto-generated method stub
+			System.out.println("Hour:" + hourofDay + ",minutes" + minutes);
+		}
+}
