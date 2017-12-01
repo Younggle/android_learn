@@ -1,0 +1,39 @@
+// 总结一下相对布局relativelayout的各种布置的区别
+
+relativelayout总的来说分为几个大的部分
+1.根据父控件进行定位的属性
+  alignParentLeft //对齐父控件的左边缘
+  alignParentRight //对齐父控件的右边缘
+  alignParentTop //对齐父控件的上边缘
+  alignParentBottom //对齐父控件的下边缘
+  centerHorizontal  //水平居中放置控件
+  centerVertical  //垂直居中放置控件
+  centerInParent  //居中放置控件
+  
+2.根据同一父控件下的兄弟控件进行布局
+  alignTop  //对齐参考组件的上边缘
+  alignBottom  //对齐参考组件的下边缘
+  alignRight  //对齐参考组件的右边缘
+  alignLeft  //对齐参考组件的左边缘
+  
+  toLeftOf  //在参考组件的左边
+  toRightOf  //在参考组件的右边
+  above  //在参考组件的上方
+  below  //在参考组件的下方
+  
+3.内边距和外边距 margin and padding,单位 dp
+  margin  //子控件和父控件之间的距离,包括上下左右,当一个组件设置了该属性，则下面的属性都无效了
+  marginLeft  //与父控件左边缘的距离
+  marginRight  //与父控件右边缘的距离
+  marginTop  //与父控件上边缘的距离
+  marginBottom  //与父控件下边缘的距离
+  
+  padding  //组件中text内容与组件自身边界的距离,与margin一样，一旦设置，单个属性全部无效
+  paddingLeft  //增加左内距
+  paddingRight  //增加右内距
+  paddingTop  //增加上内距
+  paddingBottom  //增加下内距
+  
+  设置居中效果还有一个gravity属性
+  
+  以上。个人总结
