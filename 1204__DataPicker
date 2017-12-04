@@ -1,0 +1,34 @@
+// android组件之 datapicker
+
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        datapicker = (DatePicker)findViewById(R.id.datepicker);
+        //设置默认日期,执行下面这行代码后，每次点开datepicker，显示的日期都是2017.12.4
+        datapicker.updateDate(2017, 12, 4);
+        
+        findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				int y = datapicker.getYear();
+				int m = datapicker.getMonth();
+				int d = datapicker.getDayOfMonth();
+				System.out.println("year:"+y+",month:"+m+",day:"+d);
+			}
+		});
+    }
+    
+// xml文件
+<DatePicker 
+        android:id="@+id/datepicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+        
+//模拟时钟
+<AnalogClock
+    android:id=""
+    ... />
