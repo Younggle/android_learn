@@ -37,3 +37,84 @@ relativelayout总的来说分为几个大的部分
   设置居中效果还有一个gravity属性
   
   以上。个人总结
+=====================
+
+关于margin的设置
+一般我们习惯性的会将margin的值设置为正整数，但其实margin的值可以为负数。
+我们在网页中经常看到那些右上角有X的图片都是这个原理
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00CCCCFF"
+    xmlns:tools="http://schemas.android.com/tools"
+     >
+     <ImageView 
+         android:id="@+id/imgBack"
+         android:layout_width="200dp"
+         android:layout_height="200dp"
+         android:layout_centerInParent="true"
+         android:background="@drawable/myicon"/>
+     
+     <ImageView 
+         android:id="@+id/imgcancel"
+         android:layout_width="28dp"
+         android:layout_height="28dp"
+         android:layout_marginRight="-10dp"
+         android:layout_marginTop="-15dp"
+         android:background="@drawable/cancel"
+         android:layout_alignRight="@+id/imgBack"
+         android:layout_alignTop="@+id/imgBack"/>
+    
+
+</RelativeLayout>
+
+//实现点击关闭效果
+新建一个class
+public class adactivity extends Activity{
+	
+	private ImageView imageview;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.adactivity_main);
+		imageview = (ImageView)findViewById(R.id.imgcancel);
+		imageview.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+	}
+}
+
+//在原来的mainactivity中添加
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        final Intent i = new Intent(MainActivity.this,adactivity.class);
+        Thread thread = new Thread(){
+        	public void run(){
+        		try{
+        			sleep(2000);
+        			startActivity(i);
+        		}catch(InterruptedException e){
+        			e.printStackTrace();
+        		}
+        	}
+        };
+        thread.start();
+    }
+}
+
+//最后，最重要的，在AndroidManifest.xml文件中进行新activity的注册.否则会报错，APP也无法启动
+<activity android:name="com.example.justfortest.adactivity" android:theme="@style/AppBaseTheme" />
