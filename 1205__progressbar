@@ -1,0 +1,9 @@
+// progressbar 环形进度条
+// progressbar的属性style
+// style="?android:attr/progressBarStyle"
+// 1.水平风格:Horizontal, style="?android:attr/progressBarStyleHorizontal",进度条由环形变成直线型
+// 2.小风格:Small, style="?android:attr/progressBarStyleSmall",进度条变小
+// 3.大风格：Large ,style="?android:attr/progressBarStyleLarge",进度条变大
+// 4.反向风格: Inverse, style="?android:attr/progressBarStyleInverse", 我是没看出有什么区别??
+// 5.大小反向风格：Small.Inverse,Large.Inverse 
+// 
