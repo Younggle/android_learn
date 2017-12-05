@@ -1,0 +1,278 @@
+//猜拳游戏的实现
+// 界面使用radiogroup,radiobutton和LinearLayout的多层嵌套实现
+
+//xml文件
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/ll" >
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="对战游戏"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        />
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1" >
+                
+                <ImageView
+        			android:id="@+id/imageViewId"
+        			android:layout_width="wrap_content"
+        			android:layout_height="100dp"
+        			android:src="@drawable/naizi"
+        			android:scaleType="centerInside"
+        			 />
+                
+                <RadioGroup 
+			        android:id="@+id/radioGroup1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:orientation="vertical"
+			        android:layout_margin="20dp"
+			        >
+			        
+			        <RadioButton 
+			            android:id="@+id/jiandao1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="剪刀"/>
+			        <RadioButton 
+			            android:id="@+id/shitou1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="石头"/>
+			        <RadioButton 
+			            android:id="@+id/bu1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="布"/>
+			    </RadioGroup>
+                
+
+            </LinearLayout>
+            
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"  >
+                
+                <ImageView
+        			android:id="@+id/imageView2Id"
+        			android:layout_width="wrap_content"
+        			android:layout_height="100dp"
+        			android:src="@drawable/qunzhu"
+       				android:scaleType="centerInside"
+        			/>
+                
+                <RadioGroup 
+			        android:id="@+id/radioGroup2"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:orientation="vertical"
+			        android:layout_margin="20dp"
+			        >
+			        
+			        <RadioButton 
+			            android:id="@+id/jiandao2"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="剪刀"/>
+			        <RadioButton 
+			            android:id="@+id/shitou2"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="石头"/>
+			        <RadioButton 
+			            android:id="@+id/bu2"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="布"/>
+			    </RadioGroup>
+
+            </LinearLayout>   
+        </LinearLayout>    
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button 
+	        android:text="确定"
+	        android:textSize="18sp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:id="@+id/okay"/>
+	    <Button 
+	        android:text="重来"
+	        android:textSize="18sp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:id="@+id/refresh"/>
+    </LinearLayout> 
+    <TextView 
+        android:text="比赛结果"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
+    <TextView 
+        android:id="@+id/jieguo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        />
+</LinearLayout>
+
+//完成界面布局之后，编写逻辑代码,包括一些更加简单的代码风格
+
+public class MainActivity extends Activity {
+	
+	private RadioGroup rg1,rg2;
+	private RadioButton stone1,stone2,jiandao1,jiandao2,bu1,bu2;
+	private Button okay,refresh;
+	private TextView jieguo;
+  // 定义每一个radiobutton按键状态
+	private boolean stonec1,stonec2,jdc1,jdc2,buc1,buc2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 隐藏界面上的标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.manylinearlayout);
+        
+        
+        rg1 = (RadioGroup)findViewById(R.id.radioGroup1);
+        rg2 = (RadioGroup)findViewById(R.id.radioGroup2);
+        stone1 = (RadioButton)findViewById(R.id.shitou1);
+        jiandao1 = (RadioButton)findViewById(R.id.jiandao1);
+        bu1 = (RadioButton)findViewById(R.id.bu1);
+        stone2 = (RadioButton)findViewById(R.id.shitou2);
+        jiandao2 = (RadioButton)findViewById(R.id.jiandao2);
+        bu2 = (RadioButton)findViewById(R.id.bu2);
+        okay = (Button)findViewById(R.id.okay);
+        //refresh = (Button)findViewById(R.id.refresh);
+        jieguo = (TextView)findViewById(R.id.jieguo);
+        
+        
+        // 监听，onclick一起，方便
+        okay.setOnClickListener(new OnClickListener() {
+			
+          @Override
+          public void onClick(View v) {
+            // TODO Auto-generated method stub
+            if(stonec1 == true&&stonec2==true || jdc1==true && jdc2 ==true || buc1 ==true &&  buc2== true){
+              jieguo.setText("平局");
+            }else if(stonec1 = true && jdc2 == true || jdc1 ==true && buc2 ==true || buc1 ==true && stonec2==true){
+              jieguo.setText("Player1 win");
+            }else if(stonec2 = true && jdc1 == true || jdc2 ==true && buc1 ==true || buc2 ==true && stonec1==true){
+              jieguo.setText("Player2 win");
+            } 
+          }
+        });
+        
+        
+        findViewById(R.id.refresh).setOnClickListener(new OnClickListener() {
+			 
+            @Override
+            public void onClick(View v) {
+              // TODO Auto-generated method stub
+              refresh();
+            }
+          });
+        
+        
+        
+        
+        RadioButtonListener radiolistener = new RadioButtonListener();
+        stone1.setOnCheckedChangeListener(radiolistener);
+        stone2.setOnCheckedChangeListener(radiolistener);
+        jiandao1.setOnCheckedChangeListener(radiolistener);
+        jiandao2.setOnCheckedChangeListener(radiolistener);
+        bu1.setOnCheckedChangeListener(radiolistener);
+        bu2.setOnCheckedChangeListener(radiolistener);
+    }
+    
+    // 刷新页面的方法，我采用的是重新打开这个Activity
+    public void refresh(){
+    	finish();
+    	Intent it = new Intent(MainActivity.this,MainActivity.class);
+    	startActivity(it);
+//    	LinearLayout layout = (LinearLayout)findViewById(R.id.ll);
+//    	layout.invalidate();
+    }
+
+// radiobutton的专有监听器，可以监听到radiobutton的状态
+class RadioButtonListener implements android.widget.CompoundButton.OnCheckedChangeListener{
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean ischecked) {
+			// TODO Auto-generated method
+			int i = buttonView.getId();
+			switch(i){
+			case R.id.shitou1:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家1选择了石头", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        stonec1 = true;
+				}
+				break;
+			case R.id.shitou2:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家2选择了石头", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        stonec2 = true;
+				}
+				break;
+			case R.id.jiandao1:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家1选择了剪刀", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        jdc1 = true;
+				}
+				break;
+			case R.id.jiandao2:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家2选择了剪刀", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        jdc2 = true;
+				}
+				break;
+			case R.id.bu1:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家1选择了布", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        buc1 = true;
+				}
+				break;
+			case R.id.bu2:
+				if(ischecked = true){
+					//Toast toast = Toast.makeText(getApplicationContext(), "玩家2选择了布", Toast.LENGTH_SHORT);                    
+			        //toast.show();
+			        buc2 =true;
+				}
+				break;
+			}
+		}
+ }
