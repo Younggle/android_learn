@@ -5,5 +5,78 @@
 // 2.小风格:Small, style="?android:attr/progressBarStyleSmall",进度条变小
 // 3.大风格：Large ,style="?android:attr/progressBarStyleLarge",进度条变大
 // 4.反向风格: Inverse, style="?android:attr/progressBarStyleInverse", 我是没看出有什么区别??
-// 5.大小反向风格：Small.Inverse,Large.Inverse 
+// 5.大小反向风格：SmallInverse,LargeInverse 
 // 
+// 举个栗子
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/testview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+    <ProgressBar 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/testview1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="40"
+        android:secondaryProgress="70"
+        android:id="@+id/bar1"/>
+    <Button 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn1"
+        android:layout_below="@+id/bar1"
+        android:text="第一进度"/>
+    <Button 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2"
+        android:layout_below="@+id/btn1"
+        android:text="第2进度"/>
+</RelativeLayout>
+
+// 代码
+public class MainActivity extends Activity {
+	
+	private ProgressBar progressbar;
+	//private Button firstButton,SecondButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        progressbar = (ProgressBar)findViewById(R.id.bar1);
+        // 设置进度条的长度,在这里设置之后，xml中的属性就不会生效了
+        progressbar.setMax(200);
+        
+        findViewById(R.id.btn1).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				progressbar.incrementProgressBy(30);
+			}
+		});
+        
+        findViewById(R.id.btn2).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				progressbar.incrementSecondaryProgressBy(40);
+			}
+		});
+    }
+    }
