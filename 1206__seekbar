@@ -1,0 +1,55 @@
+// seekbar可以拖动的进度条
+// seekbar的属性(xml中)
+// progress:设置初始seekbar的初始位置
+   secondaryProgress:设置第二条进度条的位置
+   max:设置进度条长度
+   
+//举个栗子
+<SeekBar 
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"  //进度条长度
+        android:layout_below="@+id/test1"
+        android:layout_progress="20"  // 默认进度条位置
+        android:layout_secondaryProgress="40"  // 第二条进度条位置
+        />
+        
+//代码实现
+Seekbarlistener sblistener = new Seekbarlistener();
+seekbar.setOnSeekBarChangeListener(sblistener)
+
+//  专门用来监听seekbar的监听器OnSeekBarChangeListener
+
+class Seekbarlistener implements OnSeekBarChangeListener{
+
+    /* 参数seekbar,progress,fromUser  
+    ** seekbar 获取到界面上的seekbar对象，progress获取到当前seekbar的progress， fromUser确定状态是否被点击拖动
+    */
+		@Override
+		public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
+			// TODO Auto-generated method stub
+			System.out.println("progress:" + progress + ",fromUser:" + fromUser);
+		}
+    // 当用户点击开始进行拖动时，执行此方法
+		@Override
+		public void onStartTrackingTouch(SeekBar seekbar) {
+			// TODO Auto-generated method stub
+			System.out.println("Start");
+		}
+    // 当用户停止点击拖动时，执行
+		@Override
+		public void onStopTrackingTouch(SeekBar seekbar) {
+			// TODO Auto-generated method stub
+			System.out.println("End");
+		}
+}
+
+
+++++++++++++++++++++++++++++++ 评分星级条 RatingBar +++++++++++++++++++++++++
+
+// 评分条 RatingBar
+属性：numStars： 设置星星个数
+stepSize: 设置星星之间额距离
+progress：设置当前星级
+
