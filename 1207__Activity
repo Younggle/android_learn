@@ -1,0 +1,40 @@
+// Android 4大组件之一  Activity
+// Activity的生命周期 onCreate -> onStart -> onResume <---> onPause ->onStop ->onDestroy
+                                                                        ↓
+                                                                    onRestart -> onStart
+                                                                    
+//启动activity是通过 意图对象Intent 进行的。
+// 设置启动的是哪个界面可以在AndroidManifest.xml文档中进行设置，也可以在onCreate中设置。
+// xml配置
+<activity
+            // 指定添加的是哪一个activity的xml文件
+            android:name="com.ygl.android_1207_activitys.MainActivity"
+            // Android:label设置的是打开页面之后,标题显示的文本信息
+            android:label="@string/app_name" >
+            // intent意图 设置该页面为默认启动页面
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+</activity>
+
+// 代码实现
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        findViewById(R.id.btn1).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+        // 通过Intent意图对象打开第二个activity
+				Intent it = new Intent();
+        // 指定从当前页面跳转到第二个页面
+				it.setClass(MainActivity.this, secondActivity.class);
+        // 开始跳转
+        startActivity(it);
+			}
+		});
+    }
