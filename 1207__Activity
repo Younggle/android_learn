@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 </activity>
+//注册第二个ACTIVITY,没有注册的话，后面的代码都无法执行
+<activity 
+            android:name="com.ygl.android_1207_activitys.secondActivity"
+            android:label="@+string/second">
+</activity>
 
 // 代码实现
     protected void onCreate(Bundle savedInstanceState) {
