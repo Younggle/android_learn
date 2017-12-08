@@ -1,0 +1,7 @@
+// 详细理解activity的生命周期
+// 一个完整的activity的周期包括 onCreate,onStart,onResume,onPause,onStop,onRestart,onDestroy
+//当一个activity正常启动时，调用onCreate,onStart,onResume
+  当用户从Activity直接回到HOME界面时，调用onPause,再次回到activity时，调用onRestart,onResume
+  当用户点击back键时，activity被销毁，调用onStop,onDestroy
+  
+  
