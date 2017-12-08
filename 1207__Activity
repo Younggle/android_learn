@@ -24,7 +24,8 @@
             android:label="@+string/second">
 </activity>
 
-// 代码实现
+// 代码实现，
+// 第二个activity要继承Activty父类，需要重写父类方法onCreate实现
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
