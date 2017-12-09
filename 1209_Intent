@@ -1,0 +1,80 @@
+// android中传递数据的对象intent意图对象
+// Intent也是Android应用组件之一，Intent的重要内容:action,data
+// Intent的putExtra()方法存储要传递的数据，getXXXExtra()方法获取数据
+   根据传递数据的类型的不同，接收数据的方法也不同
+Intent的传递方法：
+Intent  putExtra(String name, String[] value)
+Intent  putExtra(String name, Parcelable value)
+Intent  putExtra(String name, long value)
+Intent  putExtra(String name, boolean value)
+Intent  putExtra(String name, double value)
+Intent  putExtra(String name, Parcelable[] value)
+Intent  putExtra(String name, char value)
+Intent  putExtra(String name, int[] value)
+Intent  putExtra(String name, int value)
+Intent  putExtra(String name, double[] value)               
+Intent  putExtra(String name, short value)                  
+Intent  putExtra(String name, long[] value)                     
+Intent  putExtra(String name, boolean[] value)                  
+Intent  putExtra(String name, short[] value)                    
+Intent  putExtra(String name, String value)                     
+Intent  putExtra(String name, Serializable value)                   
+Intent  putExtra(String name, float[] value)                    
+Intent  putExtra(String name, Bundle value)                     
+Intent  putExtra(String name, byte[] value)                     
+Intent  putExtra(String name, CharSequence value)                   
+Intent  putExtra(String name, char[] value)                     
+Intent  putExtra(String name, byte value)                   
+Intent  putExtras(Intent src)                   
+Intent  putExtras(Bundle extras)
+
+根据传递数据的方法不同，接收方法也是相对应的,例如getIntExtra(),getStringExtra(),getBooleanExtra()....
+
+// 核心代码
+
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+        // Activity1 意图对象传递数据
+				Intent it = new Intent();
+				it.setClass(MainActivity.this, second.class);
+				it.putExtra("com.ygl.android_1209_intenttest.name","Younggle");
+				it.putExtra("com.ygl.android_1209_intenttest.isfamale", true);
+				it.putExtra("com.ygl.android_1209_intenttest.age", 20);
+				startActivity(it);
+			}
+		});
+ }
+ 
+ // activity2 接收数据
+ protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.second);
+		
+		tv = (TextView)findViewById(R.id.text1);
+		tv2 = (TextView)findViewById(R.id.text2);
+		tv3 = (TextView)findViewById(R.id.text3);
+
+		
+    // 2种不同的代码风格
+//		Intent intent = getIntent();
+//		String name = intent.getStringExtra("com.ygl.android_1209_intenttest.name");
+//		int age = intent.getIntExtra("com.ygl.android_1209_intenttest.age",21);    // getIntExtra("xxx",21)21是默认值，
+      如果没有获取到xxx中传递过来的数据的话，显示的就是21.
+//		boolean sex = intent.getBooleanExtra("com.ygl.android_1209_intenttest.isfamale",false);
+		
+		
+		tv.setText("Name:"+ getIntent().getStringExtra("com.ygl.android_1209_intenttest.name"));
+		tv2.setText("Age:"+ getIntent().getIntExtra("com.ygl.android_1209_intenttest.age",21));
+		tv3.setText("Famale:"+ getIntent().getBooleanExtra("com.ygl.android_1209_intenttest.isfamale",true));
+		
+	}
+  
+  
