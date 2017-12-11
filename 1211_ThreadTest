@@ -98,4 +98,6 @@ findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
 			}
 		});   
 
-// 当你的程序跑起来的时候，多点击几次，你会发现页面会报出提示程序无响应，是否关闭，ANR错误。为了避免ANR错误，work thread才不可或缺。
+// 当你的程序跑起来的时候，多点击几次，你会发现页面会报出提示程序无响应，是否关闭？
+   这时，在ui线程中，因为设置了一个sleep5秒的耗时操作，导致了ANR错误。
+   为了避免ANR错误，在ui线程中要尽可能少的进行耗时操作，采用开启work thread进行繁杂的耗时操作，由此避免。
