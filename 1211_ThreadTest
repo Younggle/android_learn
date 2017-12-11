@@ -1,0 +1,81 @@
+//Thread，android的重要组件之一
+// Thread 按分工分为 Main Thread,Work Thread.
+// Main Thread 主线程，UI线程,对UI中的一些元素的属性进行修改，刷新
+// Work Thread 工作线程,除了主线程之外的线程都叫work thread,原则上是不能在除了ui线程之外的线程
+   中进行对ui组件进行修改，操作
+   
+// 实例
+在xml中一个控制线程开始的button，一个horizontal风格的progressbar.textview用于演示
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world"
+        android:id="@+id/test1" />
+<Button 
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始线程"
+        android:layout_below="@+id/test1"/>
+    <ProgressBar 
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn"
+        style="?android:attr/progressBarStyleHorizontal"
+        />
+        
+// ui线程和 工作线程
+
+public class MainActivity extends Activity {
+	
+	private TextView tv1;
+	private Button btn;
+	private ProgressBar progressbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        tv1 = (TextView)findViewById(R.id.test1);
+        progressbar = (ProgressBar)findViewById(R.id.progress);
+        btn = (Button)findViewById(R.id.btn);
+        
+        ButtonListener btnListener = new ButtonListener();
+        btn.setOnClickListener(btnListener);
+    }
+    
+    
+    class ButtonListener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Thread t = new MyThread();
+			t.start();
+		}
+    	
+    }
+    
+    // 新建内部workthread类
+    class MyThread extends Thread{
+    	
+    	@Override
+    	public void run(){
+    		
+    		for(int i = 0 ;i <= 100;i ++){
+    			try{
+        			Thread.sleep(1000);
+        		}catch(InterruptedException e){
+        			e.printStackTrace();
+        		}
+    			progressbar.setProgress(progressbar.getProgress() + 1);
+    		}
+    		
+    		// 原则上不允许在主线程之外对UI元素的属性进行修改,但是有部分组件如progressbar可以在work thread中进行修改
+    		// 所以下面这行代码也不会生效
+    		tv1.setText("来自线程");
+    		
+    	}
+    }
