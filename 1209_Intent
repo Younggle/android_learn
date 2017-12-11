@@ -36,6 +36,7 @@ protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+	// 匿名内部类，适合只用一次的那种类，代码的复用性不高，不推荐使用
         findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
 			
 			@Override
