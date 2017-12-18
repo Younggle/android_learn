@@ -1,0 +1,45 @@
+android重要组件 Handler
+
+handler用于接收消息，创建消息对象，传递消息对象到消息队列中
+handler和looper相互作用，handler创建消息对象，传递对象到消息队列，再由looper从消息队列中取出。
+
+public class MainActivity extends Activity {
+	private Button btn;
+	private Handler handler;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        handler = new FirstHandler();
+        
+        findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 当用户点击按钮，创建一个消息对象，并使用handler发送对象
+				//
+				Message msg = handler.obtainMessage();
+				msg.what =2;
+				//讲消息对象放入到消息队列当中
+				handler.sendMessage(msg);
+				//1.looper将会从消息队列中讲消息对象取出
+				//2.looper将会找到与消息对象对象的handler对象
+				//3.looper将会调用handler对象的handlerMessage(Message msg)方法，用于处理消息对象
+			}
+		});
+    }
+    
+    class FirstHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			int what = msg.what;
+			System.out.println("what" + what);
+			
+		}
+    	
+    }
+    }
