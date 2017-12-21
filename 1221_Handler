@@ -1,0 +1,45 @@
+模拟在网络服务器参与下的Handler运用
+
+//先定义一个button btn1，textview tv1
+//核心代码
+
+//内部Handler类
+class MyHandler extends Handler{
+    @Override
+    public void handleMessage(){
+        System.out.println("HandlerMessage--->" + Thread.currentThread().getName());
+        // 通过这种方式，可以在work Thread中对ui元素进行修改
+        String s = (String)msg.obj;
+        tv1.setText(s);
+    }
+}
+
+// work thread线程NetworkThread
+class NetworkThread extends Thread{
+    @Override
+    public void run(){
+        System.out.println("network--->" +Thread.currentThread().getName());
+        // 模拟访问网络，所以当线程运行时，首先休眠2秒
+        try{
+            Thread.sleep(2*1000);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        // 变量s，模拟从网络中获取的数据
+        String s = "网络数据";
+        
+        Message msg = handler.obtainMessage();
+        // sendMessage()方法，无论在main thread中还是work thread中发送，都是可以的
+        msg.obj = s;
+        handler.sendMessage(msg);
+    }
+}
+
+// 监听器
+class ButtonListener implements OnClickListener{
+    @Override
+    puvblic void onClick(View v){
+        Thread t = new NetworkThread();
+        t.start();
+    }
+}
